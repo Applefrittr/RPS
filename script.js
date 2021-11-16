@@ -4,7 +4,7 @@ let cWins = 0                          //Computer wins counter
 
                     
 
-function computerPlay() {
+function computerPlay() {                   // computer's choice randomly generated using Math functions and and array of strings.  Math functions point to a string element in the array
     let arr = [`rock` , `paper` , `scissors`]
     let compChoice = arr[Math.floor(Math.random()*arr.length)]
 
@@ -13,18 +13,18 @@ function computerPlay() {
     return compChoice
 }
 
-function playerChoose() {
+function playerChoose() {                   // player inputs their choice in a prompt window.  Case insensitive.  Invalid entry caught in playRound() conditional statements
     let choice = prompt(`Choose your Weapon`)
     choice = choice.toLowerCase()
     return choice
 }
 
 function playRound()   {
-    let playerSelection = playerChoose()
-    let computerSelection = computerPlay()
+    let playerSelection = playerChoose()    // value stored from playerChoose()
+    let computerSelection = computerPlay()  // value stored from computerPlay()
 
     
-    if( playerSelection == `rock` ) {
+    if( playerSelection == `rock` ) {               // conditional statements start here for each of the choices availble to the player
 
         if( computerSelection == `rock`) {
             console.log(`TIE!`)
@@ -75,7 +75,9 @@ function playRound()   {
             console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
         }
     }
-    else    {
+    else    {                       // Invalid entry handler.  Triggers if player inputs something other than `rock` `paper` or `scissors` 
         console.log(`Invalid weapon of choice.  Please try again.`)
     }
+
+    return [pWins , cWins]          // playRound() returns an array w/ player and computer wins as the elements.  Will be our score variable
 }
