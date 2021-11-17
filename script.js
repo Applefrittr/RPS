@@ -81,3 +81,26 @@ function playRound()   {
 
     return [pWins , cWins]          // playRound() returns an array w/ player and computer wins as the elements.  Will be our score variable
 }
+
+
+function game() {
+    let result
+    let victor
+
+    for (let i=0; i<5; i++)  {
+        result = playRound()
+    }
+    console.log(`Score: Humans - ` + result[0] + `. Machines - ` + result[1] + `.`)
+    
+    if ( result[0] > result[1] )  {
+        victor = `Humans prevail!  We've defeated our machine overlords and secured the future of humanity.`
+    }
+    else if ( result[0] < result[1]) {
+        victor = `The Machines have won...  The future of the human race is bleak...`
+    }
+    else    {
+        victor = `A stalemate.  The war rages on...`
+    }
+
+    return victor
+}
