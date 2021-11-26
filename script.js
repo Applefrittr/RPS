@@ -1,7 +1,7 @@
 let pWins = 0                         //Player wins counter
 let cWins = 0                          //Computer wins counter
                
-
+const winner = false
                     
 
 function computerPlay() {                   // computer's choice randomly generated using Math functions and and array of strings.  Math functions point to a string element in the array
@@ -13,94 +13,101 @@ function computerPlay() {                   // computer's choice randomly genera
     return compChoice
 }
 
-function playerChoose() {                   // player inputs their choice in a prompt window.  Case insensitive.  Invalid entry caught in playRound() conditional statements
-    let choice = prompt(`Choose your Weapon`)
-    choice = choice.toLowerCase()
-    return choice
-}
 
-function playRound()   {
-    let playerSelection = playerChoose()    // value stored from playerChoose()
+const container = document.querySelector('.container')    //DOM created divs to display results, updates in the within playRound() conditional statements
+const result = document.createElement('div')
+const score = document.createElement('div')
+
+container.appendChild(result)
+container.appendChild(score)
+
+function playRound(button)   {
+    let playerSelection = button            //parameter button comes from the string ID on the onevent click of the specific button
     let computerSelection = computerPlay()  // value stored from computerPlay()
-
-    
+        
     if( playerSelection == `rock` ) {               // conditional statements start here for each of the choices availble to the player
 
         if( computerSelection == `rock`) {
-            console.log(`TIE!`)
-            console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
+            result.textContent = `TIE!`         
+            
+            score.textContent = "Player wins: " + pWins +  " Machine wins: " + cWins
+            
+            //console.log(`TIE!`)
+            //console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
         }
         else if( computerSelection == `paper`) {
-            console.log(`You Lose!  Paper beats Rock.`)
+            result.textContent = `You Lose!  Paper beats Rock.`
             cWins++
-            console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
+            score.textContent = `Player wins: ` + pWins + ` Machine wins: ` + cWins
         }
         else    {
-            console.log(`You Win!  Rock beats Scissors.`)
+            result.textContent = `You Win!  Rock beats Scissors.`
             pWins++
-            console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
+            score.textContent = `Player wins: ` + pWins + ` Machine wins: ` + cWins
         }
     }
     else if( playerSelection == `paper`)    {
 
         if( computerSelection == `rock`) {
-            console.log(`You Win!  Paper beats Rock.`)
+            result.textContent = `You Win!  Paper beats Rock.`
             pWins++
-            console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
+            score.textContent = `Player wins: ` + pWins + ` Machine wins: ` + cWins
         }
         else if( computerSelection == `paper`) {
-            console.log(`TIE!`)
-            console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
+            result.textContent = `TIE!`
+            score.textContent = `Player wins: ` + pWins + ` Machine wins: ` + cWins
         }
         else    {
-            console.log(`You Lose!  Scissors beats Paper.`)
+            result.textContent = `You Lose!  Scissors beats Paper.`
             cWins++
-            console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
+            score.textContent = `Player wins: ` + pWins + ` Machine wins: ` + cWins
         }
     }
     else if( playerSelection == `scissors`)    {
         
         if( computerSelection == `rock`) {
-            console.log(`You Lose!  Rock beats Scissors`)
+            result.textContent = `You Lose!  Rock beats Scissors`
             cWins++
-            console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
+            score.textContent = `Player wins: ` + pWins + ` Machine wins: ` + cWins
         }
         else if( computerSelection == `paper`) {
-            console.log(`You Win!  Scissors beats Paper.`)
+            result.textContent = `You Win!  Scissors beats Paper.`
             pWins++
-            console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
+            score.textContent = `Player wins: ` + pWins + ` Machine wins: ` + cWins
         }
         else    {
-            console.log(`TIE!`)
-            console.log(`Player wins: ` + pWins + ` Machine wins: ` + cWins)
+            result.textContent = `TIE!`
+            score.textContent = `Player wins: ` + pWins + ` Machine wins: ` + cWins
         }
     }
     else    {                       // Invalid entry handler.  Triggers if player inputs something other than `rock` `paper` or `scissors` 
         console.log(`Invalid weapon of choice.  Please try again.`)
     }
 
+
+    if (pWins == 5) {
+        alert(`YOU WIN!`)
+        pWins = 0
+        cWins = 0
+    } else if (cWins == 5)    {
+        alert(`YOU LOSE!`)
+        pWins = 0
+        cWins = 0
+    }
+
     return [pWins , cWins]          // playRound() returns an array w/ player and computer wins as the elements.  Will be our score variable
 }
 
 
-function game() {
-    let result
-    let victor
+const btn = document.querySelectorAll('button');
 
-    for (let i=0; i<5; i++)  {
-        result = playRound()
-    }
-    console.log(`Score: Humans - ` + result[0] + `. Machines - ` + result[1] + `.`)
+
+btn.forEach((button) => {
     
-    if ( result[0] > result[1] )  {
-        victor = `Humans prevail!  We've defeated our machine overlords and secured the future of humanity.`
-    }
-    else if ( result[0] < result[1]) {
-        victor = `The Machines have won...  The future of the human race is bleak...`
-    }
-    else    {
-        victor = `A stalemate.  The war rages on...`
-    }
+    button.addEventListener('click', () => {
+        console.log(button.id)
+        playRound(button.id)
+    })
+})
 
-    return victor
-}
+
