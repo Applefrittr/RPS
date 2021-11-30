@@ -5,7 +5,8 @@ body  {
     justify-content: center;
     min-height: 100vh;
     background-image: url(matrix.gif);
-    color: white
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .buttons  {
@@ -15,7 +16,17 @@ body  {
 }
 button  {
     padding: 5px 15px;
+    background-color: white;
+    border-radius: 10px;
+    border: 3px solid gray;
+}
 
+button:hover    {
+    border: 3px solid green;
+}
+
+button:active   {
+    transform: translateY(2px);
 }
 
 div.container {
@@ -26,4 +37,11 @@ div.container {
     gap:10px;
     font-size: large;
     font-weight: bold;
+    
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    
 }
