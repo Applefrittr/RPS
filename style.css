@@ -45,3 +45,8 @@ img {
     height: 50px;
     
 }
+footer  {
+    bottom: 0;
+    position: fixed;
+    padding: 20px;
+}
